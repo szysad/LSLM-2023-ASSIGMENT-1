@@ -16,7 +16,7 @@ def test_basic_io(spark, input_expected):
     output = doubling_paths_algorithm(spark, _input)
     assertDataFrameEqual(output, expected)
 
-@pytest.mark.parametrize("input_path, output_path", list(get_test_data_paths()))
+@pytest.mark.parametrize("input_path, output_path", list(get_test_data_paths(only_small=False)))
 def test_kj_io(spark, edge_schema, input_path, output_path):
     _input = spark.read.csv(input_path, header=True, schema=edge_schema)
     expected = spark.read.csv(output_path, header=True, schema=edge_schema)
